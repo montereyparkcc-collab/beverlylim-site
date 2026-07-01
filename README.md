@@ -1,11 +1,11 @@
-# Beverly Lim ù Portfolio Site
+# Beverly Lim ÔøΩ Portfolio Site
 
 Editorial portfolio redesign for [beverlylim.com](https://www.beverlylim.com), inspired by [Good Alley](https://www.good-alley.com).
 
 ## Design system
 
-- **Palette:** Cream `#FAF6F0` ù Fuchsia `#E84E8A` ù Rose `#C0547A` ù Navy `#1A1530`
-- **Type:** Playfair Display ù Cormorant Garamond ù DM Sans
+- **Palette:** Cream `#FAF6F0` ÔøΩ Fuchsia `#E84E8A` ÔøΩ Rose `#C0547A` ÔøΩ Navy `#1A1530`
+- **Type:** Playfair Display ÔøΩ Cormorant Garamond ÔøΩ DM Sans
 - **Signature:** About portrait bleeds from the left edge and overlaps into the Work section above
 
 ## Local preview
@@ -27,7 +27,7 @@ Your live site is currently on Wix. To use this custom build:
 
 ## Assets
 
-- **Hero image:** save your file as `assets/hero-placeholder.jpg` (JPG or PNG ó if PNG, rename the reference in `index.html` or save as `.jpg`)
+- **Hero image:** save your file as `assets/hero-placeholder.jpg` (JPG or PNG ÔøΩ if PNG, rename the reference in `index.html` or save as `.jpg`)
 - Portrait (About section): `assets/portrait.jpg`
 - Work thumbnails: `assets/work/`
 - Source portfolio files live in `~/Documents/BEVERLY/PORTFOLIO/`
