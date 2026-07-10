@@ -215,28 +215,49 @@
             >Read the full article in English &rarr;</a>
           </div>
 
-          <div class="press-feature-gallery" aria-label="World Journal press conference photos">
+          <div class="press-feature-gallery" aria-label="World Journal article previews">
             <figure class="press-feature-photo">
-              <img
-                src="assets/press/pageant-press-01.png"
-                alt="Press conference group photo in front of the Miss Monterey Park 2026 step-and-repeat backdrop"
-                width="900"
-                height="1200"
-                loading="lazy"
-              />
+              <button
+                class="press-feature-photo-btn"
+                type="button"
+                data-full-src="assets/press/pageant-press-01.png"
+                aria-label="View full World Journal article preview"
+              >
+                <img
+                  src="assets/press/pageant-press-01.png"
+                  alt="World Journal article preview showing the pageant press conference coverage"
+                  width="900"
+                  height="1200"
+                  loading="lazy"
+                />
+                <span class="press-feature-photo-hint">Click to enlarge</span>
+              </button>
             </figure>
             <figure class="press-feature-photo">
-              <img
-                src="assets/press/pageant-press-02.png"
-                alt="Miss Chinatown Los Angeles representatives and Monterey Park officials speaking at the pageant press conference"
-                width="900"
-                height="1200"
-                loading="lazy"
-              />
+              <button
+                class="press-feature-photo-btn"
+                type="button"
+                data-full-src="assets/press/pageant-press-02.png"
+                aria-label="View full World Journal article preview"
+              >
+                <img
+                  src="assets/press/pageant-press-02.png"
+                  alt="World Journal article preview with pageant press conference details"
+                  width="900"
+                  height="1200"
+                  loading="lazy"
+                />
+                <span class="press-feature-photo-hint">Click to enlarge</span>
+              </button>
             </figure>
           </div>
         </div>
       </article>
+
+      <dialog class="press-lightbox" id="press-lightbox" aria-label="Article preview">
+        <button class="press-lightbox-close" type="button" aria-label="Close preview">&times;</button>
+        <img class="press-lightbox-image" src="" alt="" />
+      </dialog>
 
       <ul class="press-list">
         <li class="press-item">

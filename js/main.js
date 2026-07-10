@@ -23,3 +23,39 @@ const yearEl = document.getElementById("year");
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
+
+const pressLightbox = document.getElementById("press-lightbox");
+const pressLightboxImage = pressLightbox?.querySelector(".press-lightbox-image");
+const pressLightboxClose = pressLightbox?.querySelector(".press-lightbox-close");
+
+if (pressLightbox && pressLightboxImage) {
+  document.querySelectorAll(".press-feature-photo-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      const image = button.querySelector("img");
+      const fullSrc = button.dataset.fullSrc || image?.getAttribute("src");
+
+      if (!fullSrc || !image) {
+        return;
+      }
+
+      pressLightboxImage.src = fullSrc;
+      pressLightboxImage.alt = image.alt;
+      pressLightbox.showModal();
+    });
+  });
+
+  pressLightboxClose?.addEventListener("click", () => {
+    pressLightbox.close();
+  });
+
+  pressLightbox.addEventListener("click", (event) => {
+    if (event.target === pressLightbox) {
+      pressLightbox.close();
+    }
+  });
+
+  pressLightbox.addEventListener("close", () => {
+    pressLightboxImage.removeAttribute("src");
+    pressLightboxImage.alt = "";
+  });
+}

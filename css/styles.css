@@ -613,7 +613,19 @@ button {
   margin: 0;
 }
 
-.press-feature-photo img {
+.press-feature-photo-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.press-feature-photo-btn img {
   display: block;
   width: 100%;
   height: clamp(110px, 16vw, 150px);
@@ -622,6 +634,71 @@ button {
   border-radius: 12px;
   border: 1px solid rgba(26, 21, 48, 0.08);
   box-shadow: 0 8px 20px rgba(26, 21, 48, 0.06);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.press-feature-photo-btn:hover img,
+.press-feature-photo-btn:focus-visible img {
+  transform: scale(1.02);
+  box-shadow: 0 12px 28px rgba(26, 21, 48, 0.12);
+}
+
+.press-feature-photo-hint {
+  position: absolute;
+  inset: auto 0.5rem 0.5rem auto;
+  padding: 0.2rem 0.45rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(26, 21, 48, 0.72);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.press-lightbox {
+  width: min(92vw, 760px);
+  max-height: 90vh;
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  overflow: visible;
+}
+
+.press-lightbox::backdrop {
+  background: rgba(26, 21, 48, 0.82);
+}
+
+.press-lightbox-image {
+  display: block;
+  width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.press-lightbox-close {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(250, 246, 240, 0.95);
+  color: var(--navy);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.press-lightbox-close:hover,
+.press-lightbox-close:focus-visible {
+  background: #fff;
 }
 
 .press-list {
