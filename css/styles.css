@@ -1188,7 +1188,11 @@ body.project-page .nav {
 }
 
 .pw-lightbox {
-  width: min(94vw, 1100px);
+  inset: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  max-width: min(94vw, 1100px);
   max-height: 92vh;
   padding: 0;
   border: 0;
@@ -1202,7 +1206,9 @@ body.project-page .nav {
 
 .pw-lightbox-image {
   display: block;
-  width: 100%;
+  width: auto;
+  height: auto;
+  max-width: min(94vw, 1100px);
   max-height: 92vh;
   object-fit: contain;
   border-radius: 4px;
