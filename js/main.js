@@ -59,3 +59,86 @@ if (pressLightbox && pressLightboxImage) {
     pressLightboxImage.alt = "";
   });
 }
+
+const tileLightbox = document.getElementById("tile-lightbox");
+if (tileLightbox) {
+  const panel = tileLightbox.querySelector(".tile-lightbox-panel");
+  const caption = tileLightbox.querySelector(".tile-lightbox-caption");
+  const closeBtn = tileLightbox.querySelector(".tile-lightbox-close");
+  const prevBtn = tileLightbox.querySelector(".tile-lightbox-prev");
+  const nextBtn = tileLightbox.querySelector(".tile-lightbox-next");
+
+  const tiles = Array.from(document.querySelectorAll(".tile-swatch-btn")).map((button) => ({
+    src: button.dataset.src || "",
+    name: button.dataset.name || "",
+    cat: button.dataset.cat || "",
+  }));
+  let current = 0;
+
+  const setCaption = (name, cat) => {
+    caption.textContent = name;
+    if (cat) {
+      const sub = document.createElement("span");
+      sub.textContent = cat;
+      caption.appendChild(sub);
+    }
+  };
+
+  const show = (index) => {
+    const count = tiles.length;
+    if (!count) return;
+    current = (index + count) % count;
+    const tile = tiles[current];
+    if (!tile.src) return;
+    panel.style.backgroundImage = `url('${tile.src}')`;
+    panel.setAttribute("aria-label", `${tile.name} print, shown enlarged and repeated`);
+    setCaption(tile.name, tile.cat);
+  };
+
+  const step = (delta) => show(current + delta);
+
+  document.querySelectorAll(".tile-swatch-btn").forEach((button, index) => {
+    button.addEventListener("click", () => {
+      if (!tiles[index] || !tiles[index].src) return;
+      show(index);
+      tileLightbox.showModal();
+    });
+  });
+
+  prevBtn?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    step(-1);
+  });
+  nextBtn?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    step(1);
+  });
+
+  tileLightbox.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      step(1);
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      step(-1);
+    }
+  });
+
+  closeBtn?.addEventListener("click", () => tileLightbox.close());
+
+  tileLightbox.addEventListener("click", (event) => {
+    if (event.target === tileLightbox) {
+      tileLightbox.close();
+    }
+  });
+
+  tileLightbox.addEventListener("close", () => {
+    panel.style.backgroundImage = "";
+    panel.setAttribute("aria-label", "");
+    caption.textContent = "";
+  });
+
+  // Deter casual downloading of the enlarged pattern.
+  tileLightbox.addEventListener("contextmenu", (event) => event.preventDefault());
+  tileLightbox.addEventListener("dragstart", (event) => event.preventDefault());
+}
