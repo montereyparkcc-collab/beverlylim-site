@@ -657,7 +657,11 @@ button {
 }
 
 .press-lightbox {
-  width: min(92vw, 760px);
+  inset: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  max-width: min(92vw, 760px);
   max-height: 90vh;
   padding: 0;
   border: 0;
@@ -672,7 +676,9 @@ button {
 
 .press-lightbox-image {
   display: block;
-  width: 100%;
+  width: auto;
+  height: auto;
+  max-width: min(92vw, 760px);
   max-height: 90vh;
   object-fit: contain;
   border-radius: 16px;
