@@ -142,3 +142,73 @@ if (tileLightbox) {
   tileLightbox.addEventListener("contextmenu", (event) => event.preventDefault());
   tileLightbox.addEventListener("dragstart", (event) => event.preventDefault());
 }
+
+const pwLightbox = document.getElementById("pw-lightbox");
+if (pwLightbox) {
+  const image = pwLightbox.querySelector(".pw-lightbox-image");
+  const closeBtn = pwLightbox.querySelector(".pw-lightbox-close");
+  const prevBtn = pwLightbox.querySelector(".pw-lightbox-prev");
+  const nextBtn = pwLightbox.querySelector(".pw-lightbox-next");
+
+  const pieces = Array.from(document.querySelectorAll(".pw-btn")).map((button) => {
+    const img = button.querySelector("img");
+    return { src: img?.getAttribute("src") || "", alt: img?.alt || "" };
+  });
+  let current = 0;
+
+  const show = (index) => {
+    const count = pieces.length;
+    if (!count) return;
+    current = (index + count) % count;
+    const piece = pieces[current];
+    if (!piece.src) return;
+    image.src = piece.src;
+    image.alt = piece.alt;
+  };
+
+  const step = (delta) => show(current + delta);
+
+  document.querySelectorAll(".pw-btn").forEach((button, index) => {
+    button.addEventListener("click", () => {
+      if (!pieces[index] || !pieces[index].src) return;
+      show(index);
+      pwLightbox.showModal();
+    });
+  });
+
+  prevBtn?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    step(-1);
+  });
+  nextBtn?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    step(1);
+  });
+
+  pwLightbox.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      step(1);
+    } else if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      step(-1);
+    }
+  });
+
+  closeBtn?.addEventListener("click", () => pwLightbox.close());
+
+  pwLightbox.addEventListener("click", (event) => {
+    if (event.target === pwLightbox) {
+      pwLightbox.close();
+    }
+  });
+
+  pwLightbox.addEventListener("close", () => {
+    image.removeAttribute("src");
+    image.alt = "";
+  });
+
+  // Deter casual downloading of the enlarged artwork.
+  pwLightbox.addEventListener("contextmenu", (event) => event.preventDefault());
+  pwLightbox.addEventListener("dragstart", (event) => event.preventDefault());
+}
