@@ -1,33 +1,49 @@
-# Beverly Lim � Portfolio Site
+# Beverly Lim — Portfolio Site
 
-Editorial portfolio redesign for [beverlylim.com](https://www.beverlylim.com), inspired by [Good Alley](https://www.good-alley.com).
+Editorial portfolio for [www.beverlylim.com](https://www.beverlylim.com). A static
+site (plain HTML/CSS/JS, no build step) hosted on Vercel.
 
 ## Design system
 
-- **Palette:** Cream `#FAF6F0` � Fuchsia `#E84E8A` � Rose `#C0547A` � Navy `#1A1530`
-- **Type:** Playfair Display � Cormorant Garamond � DM Sans
-- **Signature:** About portrait bleeds from the left edge and overlaps into the Work section above
+- **Palette:** Cream `#FAF6F0` · Fuchsia `#E84E8A` · Rose `#C0547A` · Navy `#1A1530`
+- **Type:** Playfair Display · Cormorant Garamond · DM Sans
+
+## Project structure
+
+```
+index.html              Home (work grid, about, press, contact)
+css/styles.css          All site styles
+js/main.js              Nav, year stamp, and the shared lightboxes
+work/<project>/         One folder per project page
+assets/work/<project>/  Web-optimized images for each project
+work/_archive/          Intentionally unlinked/archived pages
+```
 
 ## Local preview
 
 ```bash
 cd ~/beverlylim-site
-python3 -m http.server 8080
+python3 -m http.server 8000
 ```
 
-Open [http://localhost:8080](http://localhost:8080).
+Open [http://localhost:8000](http://localhost:8000).
 
-## Deploying (replacing Wix)
+## Deploying
 
-Your live site is currently on Wix. To use this custom build:
+The site is a Vercel project (directory-linked via `.vercel/`). To publish the
+current files to production:
 
-1. **Host** the folder on Vercel, Netlify, or Cloudflare Pages (drag-and-drop or connect a Git repo).
-2. **Point DNS** for `beverlylim.com` from Wix to your new host.
-3. **Update** contact email, Instagram/LinkedIn URLs, and portfolio project links in `index.html`.
+```bash
+vercel deploy --prod
+```
 
-## Assets
+> Note: Vercel's automatic GitHub deploys are not currently wired to this repo
+> (`origin` → `montereyparkcc-collab/beverlylim-site`). Until that is reconnected
+> in the Vercel dashboard (Project → Settings → Git), publish with the CLI
+> command above after pushing to `origin`.
 
-- **Hero image:** save your file as `assets/hero-placeholder.jpg` (JPG or PNG � if PNG, rename the reference in `index.html` or save as `.jpg`)
-- Portrait (About section): `assets/portrait.jpg`
-- Work thumbnails: `assets/work/`
-- Source portfolio files live in `~/Documents/BEVERLY/PORTFOLIO/`
+## Image guidelines
+
+- Keep the longest side ≤ 1600px and export JPEG at ~80% quality.
+- Use descriptive, lowercase, hyphenated filenames (e.g. `gouache-peonies.jpg`).
+- Store originals outside the repo to keep it lean.
