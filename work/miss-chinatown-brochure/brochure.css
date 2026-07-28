@@ -1,0 +1,444 @@
+/* Interactive trifold — Miss Los Angeles Chinatown brochure */
+
+.brochure-feature {
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.brochure-viewer {
+  --brochure-aspect: 1024 / 628;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.brochure-deck {
+  position: relative;
+  width: 100%;
+  max-width: 18rem;
+  min-height: 24rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: max-width 0.45s var(--ease);
+}
+
+.brochure-deck[data-state="inside"],
+.brochure-deck[data-state="outside"] {
+  max-width: 56rem;
+  min-height: 0;
+  aspect-ratio: var(--brochure-aspect);
+}
+
+.brochure-stage {
+  width: 100%;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--ease);
+}
+
+.brochure-stage[hidden] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
+  visibility: hidden;
+  display: block;
+}
+
+.brochure-stage--cover {
+  display: flex;
+  justify-content: center;
+  max-width: 18rem;
+  margin-inline: auto;
+  aspect-ratio: 1 / 1.85;
+}
+
+.brochure-deck[data-state="inside"] .brochure-stage--open,
+.brochure-deck[data-state="outside"] .brochure-stage--open {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  perspective: 2600px;
+  perspective-origin: 50% 40%;
+}
+
+/* Closed front cover (right third of outside scan) */
+
+.brochure-cover {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  color: inherit;
+}
+
+.brochure-cover__sheet {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  border-radius: 0.35rem 0.55rem 0.55rem 0.35rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+    0 28px 50px -18px rgba(26, 21, 48, 0.28),
+    0 10px 22px -12px rgba(26, 21, 48, 0.18),
+    inset -6px 0 10px -6px rgba(0, 0, 0, 0.14);
+  transform: perspective(900px) rotateY(-8deg);
+  transition: transform 0.4s var(--ease);
+}
+
+.brochure-cover:hover .brochure-cover__sheet,
+.brochure-cover:focus-visible .brochure-cover__sheet {
+  transform: perspective(900px) rotateY(-2deg) translateY(-4px);
+}
+
+.brochure-cover__img {
+  display: block;
+  width: 300%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: right center;
+  margin-left: -200%;
+  pointer-events: none;
+}
+
+.brochure-cover__edge {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 10px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.16),
+    rgba(255, 255, 255, 0.15) 40%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.brochure-cover__cue {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fuchsia);
+}
+
+/* Open card flip */
+
+.brochure-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.85s var(--ease);
+  cursor: grab;
+}
+
+.brochure-card.is-dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.brochure-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #fff;
+  box-shadow:
+    0 30px 60px -20px rgba(26, 21, 48, 0.28),
+    0 10px 24px -12px rgba(26, 21, 48, 0.18);
+}
+
+.brochure-face--back {
+  transform: rotateY(180deg);
+}
+
+.brochure-face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.brochure-creases {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.brochure-creases::before,
+.brochure-creases::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 26px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.08) 45%,
+    rgba(0, 0, 0, 0.12) 50%,
+    rgba(0, 0, 0, 0.08) 55%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mix-blend-mode: multiply;
+}
+
+.brochure-creases::before {
+  left: 33.333%;
+}
+
+.brochure-creases::after {
+  left: 66.666%;
+}
+
+.brochure-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0) 28%,
+    rgba(255, 255, 255, 0) 72%,
+    rgba(255, 255, 255, 0.14) 100%
+  );
+  opacity: 0.55;
+}
+
+.brochure-floor {
+  width: 70%;
+  max-width: 40rem;
+  height: 28px;
+  margin-top: -0.15rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(26, 21, 48, 0.18) 0%,
+    rgba(26, 21, 48, 0) 70%
+  );
+  filter: blur(2px);
+}
+
+/* Controls */
+
+.brochure-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.brochure-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 9999px;
+  background: rgba(26, 21, 48, 0.04);
+  border: 1px solid rgba(26, 21, 48, 0.1);
+}
+
+.brochure-dot {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  transition: all 0.2s var(--ease);
+}
+
+.brochure-dot[aria-pressed="true"] {
+  background: var(--fuchsia);
+  color: #fff;
+  box-shadow: 0 4px 12px -4px rgba(232, 78, 138, 0.55);
+}
+
+.brochure-hint {
+  font-size: 0.85rem;
+  color: var(--muted);
+  max-width: 28rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.brochure-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid rgba(26, 21, 48, 0.14);
+  background: #fff;
+  color: var(--ink);
+  transition: all 0.18s var(--ease);
+}
+
+.brochure-btn:hover:not(:disabled) {
+  border-color: var(--fuchsia);
+  color: var(--fuchsia);
+}
+
+.brochure-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.brochure-btn--solid {
+  background: var(--fuchsia);
+  border-color: transparent;
+  color: #fff;
+}
+
+.brochure-btn--solid:hover:not(:disabled) {
+  filter: brightness(1.05);
+  color: #fff;
+  border-color: transparent;
+}
+
+.brochure-btn--ghost {
+  background: transparent;
+}
+
+.brochure-btn--label {
+  cursor: default;
+  min-width: 3.5rem;
+  justify-content: center;
+}
+
+.brochure-btn--label:hover {
+  border-color: rgba(26, 21, 48, 0.14);
+  color: var(--ink);
+}
+
+/* Lightbox */
+
+.brochure-lightbox {
+  border: 0;
+  padding: 0;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  background: rgba(26, 21, 48, 0.94);
+  color: #fff;
+}
+
+.brochure-lightbox::backdrop {
+  background: rgba(26, 21, 48, 0.7);
+}
+
+.brochure-lightbox[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.brochure-lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  padding: 0.9rem 1rem;
+}
+
+.brochure-lightbox .brochure-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #fff;
+}
+
+.brochure-lightbox .brochure-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.brochure-lightbox .brochure-btn--solid {
+  background: var(--fuchsia);
+  border-color: transparent;
+}
+
+.brochure-lightbox__scroll {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.brochure-lightbox__img {
+  height: auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+  transition: width 0.2s ease;
+  max-width: 72rem;
+  width: 100%;
+}
+
+.brochure-lightbox__cover {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+  aspect-ratio: 1 / 1.85;
+  width: min(22rem, 70%);
+  transition: width 0.2s ease;
+}
+
+.brochure-lightbox__cover img {
+  width: 300%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: right center;
+  margin-left: -200%;
+}
+
+@media (max-width: 640px) {
+  .brochure-deck {
+    max-width: 14.5rem;
+    min-height: 20rem;
+  }
+
+  .brochure-deck[data-state="inside"],
+  .brochure-deck[data-state="outside"] {
+    max-width: 100%;
+  }
+
+  .brochure-stage--cover {
+    max-width: 14.5rem;
+  }
+
+  .brochure-face {
+    border-radius: 0.35rem;
+  }
+
+  .brochure-dot {
+    font-size: 0.62rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
