@@ -32,25 +32,30 @@
       <a class="project-back" href="../../index.html#work">&larr; All work</a>
       <p class="project-cat">Print Design</p>
       <h1 class="project-title">Miss Los Angeles Chinatown Brochure</h1>
-      <p class="project-intro">A heritage fundraiser trifold for the Miss Los Angeles Chinatown Court 2026&mdash;<em>A Journey Back to Our Roots</em>. Designed as a keepsake guests can hold in hand, and built here so you can open the cover, turn it over, and read every panel.</p>
+      <p class="project-intro">A heritage fundraiser trifold for the Miss Los Angeles Chinatown Court 2026&mdash;<em>A Journey Back to Our Roots</em>. Cream, gold, lanterns, and butterflies carry the flier&rsquo;s hierarchy into print. Open the cover, flip the spread, and read every panel. Sponsor logos on the acknowledgements panel are still pending from the court.</p>
     </header>
 
     <div class="project-body">
-      <section class="brochure-feature container" aria-label="Interactive brochure">
-        <div class="brochure-viewer" id="brochure-viewer">
+      <!-- ===================== V2 FEATURED ===================== -->
+      <section class="brochure-feature container" aria-label="Current brochure">
+        <div class="brochure-version-label">
+          <span class="brochure-version-pill">Current</span>
+          <span>Version 2 &mdash; featured trifold</span>
+        </div>
+
+        <div
+          class="brochure-viewer brochure-viewer--featured"
+          data-outside="../../assets/work/miss-chinatown-brochure/outside.png"
+          data-inside="../../assets/work/miss-chinatown-brochure/inside.png"
+          data-alt-cover="Front cover of the Miss Los Angeles Chinatown brochure, version 2."
+          data-alt-inside="Inside of the Miss Los Angeles Chinatown brochure version 2: the journey, evening program and menu, and the 2026 court."
+          data-alt-outside="Outside of the Miss Los Angeles Chinatown brochure version 2: about the pageant, acknowledgements, and front cover."
+        >
           <div class="brochure-deck" data-state="cover">
-            <!-- Closed front cover -->
             <div class="brochure-stage brochure-stage--cover" data-panel="cover">
-              <button type="button" class="brochure-cover" id="brochure-open" aria-label="Open the brochure">
+              <button type="button" class="brochure-cover" data-brochure-open aria-label="Open the brochure">
                 <div class="brochure-cover__sheet">
-                  <img
-                    src="../../assets/work/miss-chinatown-brochure/outside.png"
-                    alt=""
-                    draggable="false"
-                    class="brochure-cover__img"
-                    width="1024"
-                    height="628"
-                  />
+                  <img data-src-outside alt="" draggable="false" class="brochure-cover__img" width="1600" height="982" />
                   <div class="brochure-cover__edge" aria-hidden="true"></div>
                   <div class="brochure-sheen" aria-hidden="true"></div>
                 </div>
@@ -58,28 +63,15 @@
               </button>
             </div>
 
-            <!-- Open trifold: flip between inside & outside -->
             <div class="brochure-stage brochure-stage--open" data-panel="open" hidden>
-              <div class="brochure-card" id="brochure-card" role="group" aria-label="Interactive Miss Los Angeles Chinatown brochure">
+              <div class="brochure-card" role="group" aria-label="Interactive Miss Los Angeles Chinatown brochure, version 2">
                 <div class="brochure-face" data-face="inside">
-                  <img
-                    src="../../assets/work/miss-chinatown-brochure/inside.png"
-                    alt="Inside of the Miss Los Angeles Chinatown brochure: the journey, evening program, and the 2026 court."
-                    draggable="false"
-                    width="1024"
-                    height="628"
-                  />
+                  <img data-src-inside alt="" draggable="false" width="1600" height="982" />
                   <div class="brochure-creases" aria-hidden="true"></div>
                   <div class="brochure-sheen" aria-hidden="true"></div>
                 </div>
                 <div class="brochure-face brochure-face--back" data-face="outside">
-                  <img
-                    src="../../assets/work/miss-chinatown-brochure/outside.png"
-                    alt="Outside of the Miss Los Angeles Chinatown brochure: about the pageant, tickets, and front cover."
-                    draggable="false"
-                    width="1024"
-                    height="628"
-                  />
+                  <img data-src-outside data-alt-outside alt="" draggable="false" width="1600" height="982" />
                   <div class="brochure-creases" aria-hidden="true"></div>
                   <div class="brochure-sheen" aria-hidden="true"></div>
                 </div>
@@ -90,27 +82,34 @@
           <div class="brochure-floor" aria-hidden="true"></div>
 
           <div class="brochure-controls">
-            <button type="button" class="brochure-btn brochure-btn--solid" id="brochure-primary">
-              Open the brochure
-            </button>
-            <button type="button" class="brochure-btn" id="brochure-close" hidden>
-              Close
-            </button>
-
+            <button type="button" class="brochure-btn brochure-btn--solid" data-brochure-primary>Open the brochure</button>
+            <button type="button" class="brochure-btn" data-brochure-close hidden>Close</button>
             <div class="brochure-dots" role="tablist" aria-label="Brochure views">
               <button type="button" class="brochure-dot" data-view="cover" aria-pressed="true">Front Cover</button>
               <button type="button" class="brochure-dot" data-view="inside" aria-pressed="false">Inside</button>
               <button type="button" class="brochure-dot" data-view="outside" aria-pressed="false">Outside</button>
             </div>
-
-            <button type="button" class="brochure-btn brochure-btn--ghost" id="brochure-zoom">
-              Read up close
-            </button>
+            <button type="button" class="brochure-btn brochure-btn--ghost" data-brochure-zoom>Read up close</button>
           </div>
+          <p class="brochure-hint" data-brochure-hint>Open the cover to step inside&mdash;then drag or flip to turn it over.</p>
 
-          <p class="brochure-hint" id="brochure-hint">
-            Open the cover to step inside&mdash;then drag or flip to turn it over.
-          </p>
+          <dialog class="brochure-lightbox" aria-label="Brochure reader, version 2">
+            <div class="brochure-lightbox__bar">
+              <button type="button" class="brochure-btn" data-lightbox-view="cover">Cover</button>
+              <button type="button" class="brochure-btn" data-lightbox-view="inside">Inside</button>
+              <button type="button" class="brochure-btn" data-lightbox-view="outside">Outside</button>
+              <button type="button" class="brochure-btn" data-lightbox-zoom-out aria-label="Zoom out">&minus;</button>
+              <span class="brochure-btn brochure-btn--label" data-lightbox-zoom-label>100%</span>
+              <button type="button" class="brochure-btn" data-lightbox-zoom-in aria-label="Zoom in">+</button>
+              <button type="button" class="brochure-btn brochure-btn--solid" data-lightbox-close>Close</button>
+            </div>
+            <div class="brochure-lightbox__scroll">
+              <img class="brochure-lightbox__img" data-lightbox-img alt="" draggable="false" />
+              <div class="brochure-lightbox__cover" data-lightbox-cover hidden>
+                <img alt="Front cover of the Miss Los Angeles Chinatown brochure." draggable="false" width="1600" height="982" />
+              </div>
+            </div>
+          </dialog>
         </div>
       </section>
 
@@ -118,8 +117,8 @@
         <div class="project-section-copy">
           <h2 class="project-section-title">Designed to unfold</h2>
           <div class="project-section-text">
-            <p>The outside carries the story guests need before they sit down&mdash;pageant history, mission, sponsor placeholders, ticket pricing, and a front cover built around the 2026 Court in traditional red qipaos.</p>
-            <p>Open it and the evening opens with them: a narrative about returning to China, a timed program for &ldquo;An Evening in China,&rdquo; and introductions for the Queen and Princesses. Soft pink, florals, and glitter hold the piece together as one keepsake rather than three disconnected panels.</p>
+            <p>The outside opens with pageant history and 2026 Court accomplishments, holds space for sponsor logos on the acknowledgements panel, and closes on a keepsake front cover&mdash;gold filigree, lanterns, and the Court framed for the gala.</p>
+            <p>Inside: the journey narrative and Castelar benefit, a split evening program and banquet menu, and court introductions with portraits. Sponsor logos drop into the acknowledgements panel once the court sends them over.</p>
           </div>
           <ul class="project-section-list">
             <li><strong>Client</strong> Miss Los Angeles Chinatown / Chinese Chamber of Commerce of Los Angeles</li>
@@ -128,6 +127,92 @@
           </ul>
         </div>
       </section>
+
+      <!-- ===================== V1 ARCHIVED ===================== -->
+      <section class="brochure-archive container" id="version-1" aria-label="Earlier brochure version">
+        <details class="brochure-archive__details">
+          <summary class="brochure-archive__summary">
+            <span class="brochure-version-pill brochure-version-pill--muted">Version 1</span>
+            <span class="brochure-archive__title">Earlier draft</span>
+            <span class="brochure-archive__hint">Tucked away &mdash; same flip controls</span>
+          </summary>
+
+          <div class="brochure-archive__body">
+            <p class="brochure-archive__note">
+              The first pink trifold exploration, kept here for process. Open it the same way as the featured piece above.
+            </p>
+
+            <div
+              class="brochure-viewer brochure-viewer--archive"
+              data-outside="../../assets/work/miss-chinatown-brochure/v1/outside.png"
+              data-inside="../../assets/work/miss-chinatown-brochure/v1/inside.png"
+              data-alt-cover="Front cover of the Miss Los Angeles Chinatown brochure, version 1."
+              data-alt-inside="Inside of the Miss Los Angeles Chinatown brochure version 1."
+              data-alt-outside="Outside of the Miss Los Angeles Chinatown brochure version 1."
+            >
+              <div class="brochure-deck" data-state="cover">
+                <div class="brochure-stage brochure-stage--cover" data-panel="cover">
+                  <button type="button" class="brochure-cover" data-brochure-open aria-label="Open version 1 brochure">
+                    <div class="brochure-cover__sheet">
+                      <img data-src-outside alt="" draggable="false" class="brochure-cover__img" width="1024" height="628" />
+                      <div class="brochure-cover__edge" aria-hidden="true"></div>
+                      <div class="brochure-sheen" aria-hidden="true"></div>
+                    </div>
+                    <span class="brochure-cover__cue">Tap to open</span>
+                  </button>
+                </div>
+
+                <div class="brochure-stage brochure-stage--open" data-panel="open" hidden>
+                  <div class="brochure-card" role="group" aria-label="Interactive Miss Los Angeles Chinatown brochure, version 1">
+                    <div class="brochure-face" data-face="inside">
+                      <img data-src-inside alt="" draggable="false" width="1024" height="628" />
+                      <div class="brochure-creases" aria-hidden="true"></div>
+                      <div class="brochure-sheen" aria-hidden="true"></div>
+                    </div>
+                    <div class="brochure-face brochure-face--back" data-face="outside">
+                      <img data-src-outside data-alt-outside alt="" draggable="false" width="1024" height="628" />
+                      <div class="brochure-creases" aria-hidden="true"></div>
+                      <div class="brochure-sheen" aria-hidden="true"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="brochure-floor" aria-hidden="true"></div>
+
+              <div class="brochure-controls">
+                <button type="button" class="brochure-btn brochure-btn--solid" data-brochure-primary>Open the brochure</button>
+                <button type="button" class="brochure-btn" data-brochure-close hidden>Close</button>
+                <div class="brochure-dots" role="tablist" aria-label="Version 1 brochure views">
+                  <button type="button" class="brochure-dot" data-view="cover" aria-pressed="true">Front Cover</button>
+                  <button type="button" class="brochure-dot" data-view="inside" aria-pressed="false">Inside</button>
+                  <button type="button" class="brochure-dot" data-view="outside" aria-pressed="false">Outside</button>
+                </div>
+                <button type="button" class="brochure-btn brochure-btn--ghost" data-brochure-zoom>Read up close</button>
+              </div>
+              <p class="brochure-hint" data-brochure-hint>Open the cover to step inside&mdash;then drag or flip to turn it over.</p>
+
+              <dialog class="brochure-lightbox" aria-label="Brochure reader, version 1">
+                <div class="brochure-lightbox__bar">
+                  <button type="button" class="brochure-btn" data-lightbox-view="cover">Cover</button>
+                  <button type="button" class="brochure-btn" data-lightbox-view="inside">Inside</button>
+                  <button type="button" class="brochure-btn" data-lightbox-view="outside">Outside</button>
+                  <button type="button" class="brochure-btn" data-lightbox-zoom-out aria-label="Zoom out">&minus;</button>
+                  <span class="brochure-btn brochure-btn--label" data-lightbox-zoom-label>100%</span>
+                  <button type="button" class="brochure-btn" data-lightbox-zoom-in aria-label="Zoom in">+</button>
+                  <button type="button" class="brochure-btn brochure-btn--solid" data-lightbox-close>Close</button>
+                </div>
+                <div class="brochure-lightbox__scroll">
+                  <img class="brochure-lightbox__img" data-lightbox-img alt="" draggable="false" />
+                  <div class="brochure-lightbox__cover" data-lightbox-cover hidden>
+                    <img alt="Front cover of the Miss Los Angeles Chinatown brochure, version 1." draggable="false" width="1024" height="628" />
+                  </div>
+                </div>
+              </dialog>
+            </div>
+          </div>
+        </details>
+      </section>
     </div>
 
     <nav class="project-nav container" aria-label="Project navigation">
@@ -135,25 +220,6 @@
       <a class="project-nav-link project-nav-link--next" href="../mpcc/">Monterey Park Chamber &rarr;</a>
     </nav>
   </article>
-
-  <!-- Lightbox reader -->
-  <dialog class="brochure-lightbox" id="brochure-lightbox" aria-label="Brochure reader">
-    <div class="brochure-lightbox__bar">
-      <button type="button" class="brochure-btn" data-lightbox-view="cover">Cover</button>
-      <button type="button" class="brochure-btn" data-lightbox-view="inside">Inside</button>
-      <button type="button" class="brochure-btn" data-lightbox-view="outside">Outside</button>
-      <button type="button" class="brochure-btn" id="lightbox-zoom-out" aria-label="Zoom out">&minus;</button>
-      <span class="brochure-btn brochure-btn--label" id="lightbox-zoom-label">100%</span>
-      <button type="button" class="brochure-btn" id="lightbox-zoom-in" aria-label="Zoom in">+</button>
-      <button type="button" class="brochure-btn brochure-btn--solid" id="lightbox-close">Close</button>
-    </div>
-    <div class="brochure-lightbox__scroll">
-      <img class="brochure-lightbox__img" id="lightbox-img" alt="" draggable="false" />
-      <div class="brochure-lightbox__cover" id="lightbox-cover" hidden>
-        <img src="../../assets/work/miss-chinatown-brochure/outside.png" alt="Front cover of the Miss Los Angeles Chinatown brochure." draggable="false" width="1024" height="628" />
-      </div>
-    </div>
-  </dialog>
 
   <footer class="footer">
     <span>&copy; <span id="year"></span> Beverly Lim</span>

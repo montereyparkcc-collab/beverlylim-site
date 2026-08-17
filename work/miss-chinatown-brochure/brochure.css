@@ -1,11 +1,39 @@
 /* Interactive trifold — Miss Los Angeles Chinatown brochure */
 
 .brochure-feature {
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.brochure-version-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.brochure-version-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.65rem;
+  border-radius: 9999px;
+  background: var(--fuchsia);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.brochure-version-pill--muted {
+  background: rgba(26, 21, 48, 0.55);
 }
 
 .brochure-viewer {
-  --brochure-aspect: 1024 / 628;
+  --brochure-aspect: 1600 / 981;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -54,9 +82,9 @@
 .brochure-stage--cover {
   display: flex;
   justify-content: center;
-  max-width: 18rem;
+  max-width: 17.5rem;
   margin-inline: auto;
-  aspect-ratio: 1 / 1.85;
+  aspect-ratio: 1 / 1.84;
 }
 
 .brochure-deck[data-state="inside"] .brochure-stage--open,
@@ -67,8 +95,6 @@
   perspective: 2600px;
   perspective-origin: 50% 40%;
 }
-
-/* Closed front cover (right third of outside scan) */
 
 .brochure-cover {
   width: 100%;
@@ -84,9 +110,9 @@
   position: relative;
   width: 100%;
   flex: 1;
-  border-radius: 0.35rem 0.55rem 0.55rem 0.35rem;
+  border-radius: 0.25rem 0.45rem 0.45rem 0.25rem;
   overflow: hidden;
-  background: #fff;
+  background: #f7f1e6;
   box-shadow:
     0 28px 50px -18px rgba(26, 21, 48, 0.28),
     0 10px 22px -12px rgba(26, 21, 48, 0.18),
@@ -101,13 +127,14 @@
 }
 
 .brochure-cover__img {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: block;
-  width: 300%;
   height: 100%;
+  width: 300%;
   max-width: none;
-  object-fit: cover;
-  object-position: right center;
-  margin-left: -200%;
+  object-fit: fill;
   pointer-events: none;
 }
 
@@ -132,8 +159,6 @@
   color: var(--fuchsia);
 }
 
-/* Open card flip */
-
 .brochure-card {
   position: relative;
   width: 100%;
@@ -153,9 +178,9 @@
   inset: 0;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.35rem;
   overflow: hidden;
-  background: #fff;
+  background: #f7f1e6;
   box-shadow:
     0 30px 60px -20px rgba(26, 21, 48, 0.28),
     0 10px 24px -12px rgba(26, 21, 48, 0.18);
@@ -168,8 +193,10 @@
 .brochure-face img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   pointer-events: none;
+  background: #f7f1e6;
 }
 
 .brochure-creases {
@@ -232,8 +259,6 @@
   );
   filter: blur(2px);
 }
-
-/* Controls */
 
 .brochure-controls {
   display: flex;
@@ -334,8 +359,6 @@
   color: var(--ink);
 }
 
-/* Lightbox */
-
 .brochure-lightbox {
   border: 0;
   padding: 0;
@@ -393,7 +416,7 @@
 
 .brochure-lightbox__img {
   height: auto;
-  border-radius: 0.5rem;
+  border-radius: 0.35rem;
   box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
   transition: width 0.2s ease;
   max-width: 72rem;
@@ -402,20 +425,89 @@
 
 .brochure-lightbox__cover {
   overflow: hidden;
-  border-radius: 0.5rem;
+  border-radius: 0.35rem;
   box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
-  aspect-ratio: 1 / 1.85;
+  aspect-ratio: 1 / 1.84;
   width: min(22rem, 70%);
   transition: width 0.2s ease;
+  background: #f7f1e6;
+  position: relative;
 }
 
 .brochure-lightbox__cover img {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 300%;
   height: 100%;
   max-width: none;
-  object-fit: cover;
-  object-position: right center;
-  margin-left: -200%;
+  object-fit: fill;
+}
+
+.brochure-archive {
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.brochure-archive__details {
+  border-top: 1px solid rgba(26, 21, 48, 0.1);
+  padding-top: 1.5rem;
+}
+
+.brochure-archive__summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.35rem 0;
+  user-select: none;
+}
+
+.brochure-archive__summary::-webkit-details-marker {
+  display: none;
+}
+
+.brochure-archive__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+
+.brochure-archive__hint {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.brochure-archive__summary::after {
+  content: "+";
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fuchsia);
+  margin-left: 0.25rem;
+}
+
+.brochure-archive__details[open] .brochure-archive__summary::after {
+  content: "–";
+}
+
+.brochure-archive__body {
+  padding-top: 1.25rem;
+}
+
+.brochure-archive__note {
+  text-align: center;
+  max-width: 34rem;
+  margin: 0 auto 1.5rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.brochure-viewer--archive .brochure-deck[data-state="inside"],
+.brochure-viewer--archive .brochure-deck[data-state="outside"] {
+  max-width: 48rem;
 }
 
 @media (max-width: 640px) {
@@ -434,11 +526,16 @@
   }
 
   .brochure-face {
-    border-radius: 0.35rem;
+    border-radius: 0.25rem;
   }
 
   .brochure-dot {
     font-size: 0.62rem;
     padding: 0.3rem 0.5rem;
+  }
+
+  .brochure-archive__hint {
+    margin-left: 0;
+    width: 100%;
   }
 }
