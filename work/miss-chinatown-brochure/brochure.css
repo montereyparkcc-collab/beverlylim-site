@@ -448,6 +448,11 @@
   padding-bottom: clamp(3rem, 6vw, 5rem);
 }
 
+.brochure-archive__details {
+  border-top: 1px solid rgba(26, 21, 48, 0.1);
+  padding-top: 1.5rem;
+}
+
 .brochure-archive__details + .brochure-archive__details {
   margin-top: 0.75rem;
   border-top: 1px solid rgba(26, 21, 48, 0.08);
