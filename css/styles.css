@@ -1388,6 +1388,18 @@ body.project-page .nav {
   font-weight: 600;
 }
 
+.project-section-list a {
+  color: var(--fuchsia);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.project-section-list a:hover,
+.project-section-list a:focus-visible {
+  color: var(--navy);
+}
+
 .project-hero {
   margin-bottom: clamp(0.5rem, 2vw, 1rem);
 }
