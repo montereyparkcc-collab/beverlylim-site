@@ -307,20 +307,6 @@
   line-height: 1.5;
 }
 
-.brochure-pdf {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.55rem;
-  margin: 0.25rem 0 0;
-}
-
-.brochure-pdf__note {
-  font-size: 0.78rem;
-  color: var(--muted);
-  text-align: center;
-}
-
 .brochure-btn {
   display: inline-flex;
   align-items: center;
